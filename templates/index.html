@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Template </title>
+{% endblock %}
+
+
+
+{% block body %}
+<div class="container w3-center w3-padding">
+
+    {% if tasks|length < 1 %}
+        <p>Your list is empty... Add one below</p>
+    {% else %}
+    <table class="w3-table-all w3-padding w3-panel w3-card">
+        <thead>
+            <td>Task</td>
+            <td>Added</td>
+            <td>Actions</td>
+        </thead>
+        
+        {% for task in tasks %}
+        <tr>
+            <td>{{task.content}}</td>
+            <td>{{task.date_created.date()}}</td>
+            <td class="w3-row">
+                <a class="w3-half" href="/delete/{{task.id}}">Delete</a>
+                <br>
+                <a class="w3-half" href="/update/{{task.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <form action="/" method="post">
+        <input type="text" name="content" id="content">
+        <button class="w3-button w3-padding" type="submit">Submit</button>
+    </form>
+
+
+</div>
+{% endblock %}
