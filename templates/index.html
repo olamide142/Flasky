@@ -8,9 +8,14 @@
 
 {% block body %}
 <div class="container w3-center w3-padding">
-
+    
+        <form action="/" method="post">
+            <input type="text" name="content" id="content">
+            <button class="w3-button w3-padding" type="submit">Submit</button>
+        </form>
+    
     {% if tasks|length < 1 %}
-        <p>Your list is empty... Add one below</p>
+        <p>Your list is empty... Add one</p>
     {% else %}
     <table class="w3-table-all w3-padding w3-panel w3-card">
         <thead>
@@ -19,7 +24,7 @@
             <td>Actions</td>
         </thead>
         
-        {% for task in tasks %}
+        {% for task in tasks|reverse %}
         <tr>
             <td>{{task.content}}</td>
             <td>{{task.date_created.date()}}</td>
@@ -32,11 +37,6 @@
         {% endfor %}
     </table>
     {% endif %}
-
-    <form action="/" method="post">
-        <input type="text" name="content" id="content">
-        <button class="w3-button w3-padding" type="submit">Submit</button>
-    </form>
 
 
 </div>
